@@ -21,7 +21,7 @@ public class IngredientsController {
 
     public final IngredientService ingredientService;
     //todo:construct
-    @GetMapping("/id")
+    @GetMapping(path="/{id}")
     Ingredient getIngredient(@PathVariable Integer id){
         return ingredientService.getIngredient(id);
     }

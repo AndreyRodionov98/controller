@@ -15,7 +15,7 @@ public class IngredientServiceimpl implements IngredientService {
 
     @Override
     public Ingredient getIngredient(int id) {
-        return ingredientMap.getOrDefault(id,null);
+        return ingredientMap.get(id);
     }
 
 

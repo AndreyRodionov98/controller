@@ -10,7 +10,7 @@ import pro.sky.controller.services.RecipeService;
 @RequiredArgsConstructor
 public class RecipesController {
     public final RecipeService recipeService;
-    @GetMapping(path="*/id")
+    @GetMapping(path="/{id}")
     Recipe getRecipe(@PathVariable int id){
         return recipeService.getRecipe(id);
     }
