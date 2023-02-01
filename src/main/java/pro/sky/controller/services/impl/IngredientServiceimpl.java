@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import pro.sky.controller.model.Ingredient;
 import pro.sky.controller.services.IngredientService;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,7 +16,7 @@ public class IngredientServiceimpl implements IngredientService {
 
     @Override
     public Ingredient getIngredient(int id) {
-        return ingredientMap.getOrDefault(id,null);
+        return ingredientMap.get(id);
     }
 
 
@@ -24,4 +25,19 @@ public class IngredientServiceimpl implements IngredientService {
          ingredientMap.put(id++,ingredient) ;
         return ingredient;
     }
+    @Override
+    public Collection<Ingredient>getAll(){
+        return ingredientMap.values();
+    }
+    @Override
+    public Ingredient removeIngredient(int id){
+        return ingredientMap.remove(id);
+    }
+    @Override
+    public Ingredient  updateIngredient(int id, Ingredient ingredient){
+       ingredientMap.put(id,ingredient);
+        return ingredient;
+    }
+
+
 }
