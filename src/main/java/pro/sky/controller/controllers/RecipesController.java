@@ -61,6 +61,7 @@ public class RecipesController {
     ResponseEntity<Recipe> addRecipe(@RequestBody Recipe recipe) {
         //if (StringUtils.isAllEmpty(recipe.getName()))
         //{return ResponseEntity.badRequest().body("название рецепта не может быть пустым");}
+        //В ЧЕМ ЗДЕСЬ ОШИБКА???
             return ResponseEntity.ok(recipeService.addRecipe(recipe));
 }
 
