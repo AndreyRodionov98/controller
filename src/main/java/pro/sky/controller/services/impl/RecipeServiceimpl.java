@@ -1,5 +1,6 @@
 package pro.sky.controller.services.impl;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import pro.sky.controller.model.Recipe;
 import pro.sky.controller.services.RecipeService;
@@ -18,7 +19,7 @@ public class RecipeServiceimpl implements RecipeService {
 
     @Override
     public Recipe addRecipe(Recipe recipe) {
-        recipeMap.put(id++, recipe);
+    recipeMap.put(id++, recipe);
         return recipe;
     }
     @Override
