@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pro.sky.controller.model.Recipe;
@@ -58,10 +59,9 @@ public class RecipesController {
             )
     })
     @PostMapping
-    ResponseEntity<Recipe> addRecipe(@RequestBody Recipe recipe) {
-        //if (StringUtils.isAllEmpty(recipe.getName()))
-        //{return ResponseEntity.badRequest().body("название рецепта не может быть пустым");}
-        //В ЧЕМ ЗДЕСЬ ОШИБКА???
+    ResponseEntity<?> addRecipe(@RequestBody Recipe recipe) {
+        if (StringUtils.isAllEmpty(recipe.getName()))
+        {return ResponseEntity.badRequest().body("название рецепта не может быть пустым");}
             return ResponseEntity.ok(recipeService.addRecipe(recipe));
 }
 
