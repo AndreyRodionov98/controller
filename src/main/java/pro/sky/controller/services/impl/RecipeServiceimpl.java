@@ -20,7 +20,7 @@ public class RecipeServiceimpl implements RecipeService {
     private Map<Integer, Recipe> recipeMap=new HashMap<>();
     private static int id=0;
     private final FileService fileService;
-    public  RecipeServiceimpl (@Qualifier("IngredientFileService") FileService fileService) {
+    public  RecipeServiceimpl (@Qualifier("RecipeFileService") FileService fileService) {
         this.fileService = fileService;
     }
 @Override
@@ -72,6 +72,10 @@ public class RecipeServiceimpl implements RecipeService {
     private void readFromFileRecipe() throws Exception {
         try {
             String json = fileService.readFromFile();
+            if (json == null){
+                System.out.println(" файл не существует!");
+
+            }
             recipeMap = new ObjectMapper().readValue(json, new TypeReference<HashMap<Integer, Recipe>>() {
             });
         }catch (JsonProcessingException e){

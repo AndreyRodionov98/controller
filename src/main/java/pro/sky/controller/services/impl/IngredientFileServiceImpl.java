@@ -13,9 +13,9 @@ import java.nio.file.Path;
 
 @Service("ingredientFileService")
 public class IngredientFileServiceImpl implements FileService {
-    @Value("src/main/resources")
+    @Value("${path.to.files}")
     private String dataFilePathIngredient;
-    @Value("ingredient.json")
+    @Value("${name.of.ingredient.file}")
     private String dataFileNameIngredient;
 
 

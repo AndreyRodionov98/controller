@@ -61,7 +61,11 @@ public class IngredientServiceimpl implements IngredientService {
     }
     private void readFromFileIngredient() throws RuntimeException {
         try {
-            String json = fileService.readFromFile();
+            String json  = fileService.readFromFile();
+            if (json == null){
+                System.out.println(" файл не существует!");
+
+            }
             ingredientMap = new ObjectMapper().readValue(json, new TypeReference<HashMap<Integer, Ingredient>>() {
             });
         }catch (JsonProcessingException e){

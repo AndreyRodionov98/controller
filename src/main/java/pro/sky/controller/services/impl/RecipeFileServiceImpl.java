@@ -11,9 +11,9 @@ import java.nio.file.Path;
 
 @Service("RecipeFileService")
 public class RecipeFileServiceImpl implements FileService {
-    @Value("src/main/resources")
+    @Value("${path.to.files}")
     private String dataFilePathIngredient;
-    @Value("recipe.json")
+    @Value("${name.of.recipe.file}")
     private String dataFileNameRecipe;
     @Override
     public boolean saveToFile(String json) {
