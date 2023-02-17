@@ -2,7 +2,6 @@ package pro.sky.controller.services.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,8 +19,8 @@ public class IngredientServiceimpl implements IngredientService {
     private Map<Integer, Ingredient>ingredientMap=new HashMap<>();
     private static int id=0;
     private final FileService fileService;
-    public IngredientServiceimpl(@Qualifier("ingredientFileService") FileService fileService){
-        this.fileService = fileService;
+    public IngredientServiceimpl(@Qualifier("IngredientFileService") FileService ingredientFileService){
+        this.fileService = ingredientFileService;
 
 
     }
@@ -56,18 +55,19 @@ public class IngredientServiceimpl implements IngredientService {
 
     }
     @PostConstruct
-    private void initIngredient() throws JsonProcessingException {
+    private void initIngredient() throws RuntimeException {
         readFromFileIngredient();
     }
     private void readFromFileIngredient() throws RuntimeException {
         try {
-            String json  = fileService.readFromFile();
+
+            String json = fileService.readFromFile();
             if (json == null){
                 System.out.println(" файл не существует!");
 
-            }
+            }else {
             ingredientMap = new ObjectMapper().readValue(json, new TypeReference<HashMap<Integer, Ingredient>>() {
-            });
+            });}
         }catch (JsonProcessingException e){
             throw new RuntimeException("файл не прочитан");
         }

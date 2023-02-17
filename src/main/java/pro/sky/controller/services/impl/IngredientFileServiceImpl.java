@@ -1,24 +1,29 @@
 package pro.sky.controller.services.impl;
 
 
+import jakarta.annotation.PostConstruct;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import pro.sky.controller.services.FileService;
 
-import javax.xml.crypto.Data;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-@Service("ingredientFileService")
+@Service("IngredientFileService")
 public class IngredientFileServiceImpl implements FileService {
+    private  Path path;
     @Value("${path.to.files}")
     private String dataFilePathIngredient;
     @Value("${name.of.ingredient.file}")
     private String dataFileNameIngredient;
-
-
+    @PostConstruct
+    private void init(){
+        path=Path.of(dataFilePathIngredient,dataFileNameIngredient);
+    }
     @Override
     public boolean saveToFile(String json) {
         try {
@@ -63,6 +68,27 @@ public class IngredientFileServiceImpl implements FileService {
     @Override
     public File getDataFileTxt() {
         return new File(dataFileNameIngredient+"/"+dataFilePathIngredient);
+    }
+    @Override
+    public InputStreamResource exportFile()throws FileNotFoundException{
+        File file=getDataFileTxt();
+        return new InputStreamResource (new FileInputStream(file));
+    }
+    @Override
+    public  void importFile(MultipartFile file)throws FileNotFoundException{
+        cleanDataFile();
+        FileOutputStream fos=new FileOutputStream(getDataFileTxt());
+        try {
+            IOUtils.copy(file.getInputStream(),fos);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public Path getPath() {
+        return path;
     }
 
 

@@ -1,6 +1,6 @@
 package pro.sky.controller.services;
 
-import pro.sky.controller.model.Ingredient;
+
 import pro.sky.controller.model.Recipe;
 
 import java.util.Collection;

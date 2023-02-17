@@ -10,7 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 public class Ingredient {
-@NotBlank(message = "Name is mandatory")
+
+    @NotBlank(message = "Name is mandatory")
     private String name;
 @Positive
     private Integer count;

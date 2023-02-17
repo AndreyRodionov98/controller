@@ -35,8 +35,7 @@ public class RecipesController {
             @Content(mediaType = "application/json", schema = @Schema(implementation = Recipe.class))
             )})
     @Parameters(value = {@Parameter(name = "id", example = "1")})
-    ResponseEntity<Recipe> getRecipe(@PathVariable int id) {
-        return ResponseEntity.ok(recipeService.getRecipe(id));
+    ResponseEntity<Recipe> getRecipe(@PathVariable int id) {return ResponseEntity.ok(recipeService.getRecipe(id));
     }
 
     @GetMapping("/all")
