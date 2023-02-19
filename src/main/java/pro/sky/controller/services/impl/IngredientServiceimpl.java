@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.webjars.NotFoundException;
 import pro.sky.controller.model.Ingredient;
 import pro.sky.controller.services.FileService;
 import pro.sky.controller.services.IngredientService;
@@ -28,6 +29,9 @@ public class IngredientServiceimpl implements IngredientService {
 
     @Override
     public Ingredient getIngredient(int id) {
+        if(ingredientMap.containsKey(id)){
+            throw new NotFoundException("ингредиен с заданным id не найден");
+        }
         return ingredientMap.get(id);
     }
 
